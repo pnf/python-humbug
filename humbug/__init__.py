@@ -33,7 +33,7 @@ from distutils.version import LooseVersion
 from ConfigParser import SafeConfigParser
 
 
-__version__ = "0.1.7"
+__version__ = "0.1.8"
 
 # Check that we have a recent enough version
 # Older versions don't provide the 'json' attribute on responses.
@@ -273,3 +273,5 @@ def _mk_events(event_types=None):
 
 Client._register('send_message', url='messages', make_request=(lambda request: request))
 Client._register('get_messages', method='GET', url='messages/latest', longpolling=True)
+Client._register('get_events', url='events', method='GET', longpolling=True, make_request=(lambda **kwargs: kwargs))
+Client._register('register', make_request=_mk_events)
